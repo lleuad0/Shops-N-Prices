@@ -8,85 +8,51 @@
 
     <TextView
         android:id="@+id/productNameTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="24dp"
-        android:text="Product Name"
+        style="@style/EditActivityTitle"
+        android:text="@string/product_name_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/productNameEditable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="Product name"
-        android:inputType="textPersonName"
+        android:id="@+id/productNameInput"
+        style="@style/EditActivityInput"
+        android:hint="@string/product_name_hint"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/productNameTitle" />
 
     <TextView
         android:id="@+id/productShopTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="24dp"
-        android:text="Product Shop"
+        style="@style/EditActivityTitle"
+        android:text="@string/product_shop_title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productNameEditable" />
+        app:layout_constraintTop_toBottomOf="@+id/productNameInput" />
 
     <EditText
-        android:id="@+id/productShopEditable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Product Shop"
+        android:id="@+id/productShopInput"
+        style="@style/EditActivityInput"
+        android:hint="@string/product_shop_hint"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/productShopTitle" />
 
     <TextView
         android:id="@+id/productPriceTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="24dp"
-        android:text="Product Price"
+        style="@style/EditActivityTitle"
+        android:text="@string/product_price_title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productShopEditable" />
+        app:layout_constraintTop_toBottomOf="@+id/productShopInput" />
 
     <EditText
         android:id="@+id/productPriceEditable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="0.00"
-        android:inputType="number"
+        style="@style/EditActivityInputPrice"
+        android:hint="@string/product_price_hint"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/productPriceTitle" />
 
     <Button
         android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
+        style="@style/EditActivityContent"
         android:onClick="saveAndExit"
-        android:text="Save"
+        android:text="@string/save_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/productPriceEditable" />
 </androidx.constraintlayout.widget.ConstraintLayout>

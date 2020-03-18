@@ -22,22 +22,21 @@ public class EditProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_product);
 
-        productTextView = findViewById(R.id.productNameEditable);
-        shopTextView = findViewById(R.id.productShopEditable);
+        productTextView = findViewById(R.id.productNameInput);
+        shopTextView = findViewById(R.id.productShopInput);
         priceTextView = findViewById(R.id.productPriceEditable);
 
         Intent intent = getIntent();
         productName = intent.getStringExtra("name");
         productShop = intent.getStringExtra("shop");
-        productPrice = intent.getDoubleExtra("price",0.0);
+        productPrice = intent.getDoubleExtra("price", 0.00);
 
         productTextView.setText(productName);
         shopTextView.setText(productShop);
         priceTextView.setText(String.valueOf(productPrice));
     }
 
-    public void saveAndExit(View view){
+    public void saveAndExit(View view) {
         super.onBackPressed();
     }
-
 }

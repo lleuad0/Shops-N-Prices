@@ -12,4 +12,13 @@
     <string name="info_options_menu_title">Изменить этот продукт</string>
     <string name="info_table_shops_title">Доступно в</string>
     <string name="info_table_prices_title">По цене</string>
+
+    <string name="edit_activity_title">Изменить продукт</string>
+    <string name="product_name_title">Продукт</string>
+    <string name="product_name_hint">Введите название</string>
+    <string name="product_shop_title">Магазин</string>
+    <string name="product_shop_hint">Введите магазин</string>
+    <string name="product_price_title">Цена</string>
+    <string name="product_price_hint">0,00</string>
+    <string name="save_button">Сохранить</string>
 </resources>

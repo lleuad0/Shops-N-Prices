@@ -26,4 +26,27 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="EditActivityContent">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+    </style>
+
+    <style name="EditActivityTitle" parent="EditActivityContent">
+        <item name="android:layout_marginTop">24dp</item>
+    </style>
+
+    <style name="EditActivityInput" parent="EditActivityContent">
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:ems">10</item>
+        <item name="android:inputType">textShortMessage</item>
+    </style>
+
+    <style name="EditActivityInputPrice" parent="EditActivityContent">
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:ems">5</item>
+        <item name="android:inputType">numberDecimal</item>
+    </style>
+
 </resources>
