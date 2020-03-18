@@ -7,4 +7,9 @@
     <string name="del_alert_message">Удалить этот продукт?</string>
     <string name="del_alert_positive">Да</string>
     <string name="del_alert_negative">Нет</string>
+
+    <string name="info_activity_title">О продукте</string>
+    <string name="info_options_menu_title">Изменить этот продукт</string>
+    <string name="info_table_shops_title">Доступно в</string>
+    <string name="info_table_prices_title">По цене</string>
 </resources>

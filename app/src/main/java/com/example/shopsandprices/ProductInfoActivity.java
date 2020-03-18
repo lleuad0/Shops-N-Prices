@@ -28,15 +28,15 @@ public class ProductInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_info);
 
+        TextView productTextView = findViewById(R.id.productTitleTextView);
+        TextView shopTextView =  findViewById(R.id.shopTextView);
+        TextView priceTextView =  findViewById(R.id.priceTextView);
+
         Intent intent = getIntent();
         productName = intent.getStringExtra("name");
 
         Cursor cursor = MainActivity.sqLiteDatabase.rawQuery("SELECT Price,Shop FROM Prices WHERE Product=?", new String[]{productName});
         cursor.moveToFirst();
-
-        TextView productTextView = findViewById(R.id.productTitleTextView);
-        TextView shopTextView1 =  findViewById(R.id.shopTextView1);
-        TextView priceTextView1 =  findViewById(R.id.priceTextView1);
 
         int shopIndex = cursor.getColumnIndex("Shop");
         int priceIndex = cursor.getColumnIndex("Price");
@@ -44,9 +44,11 @@ public class ProductInfoActivity extends AppCompatActivity {
         productShop = cursor.getString(shopIndex);
         productPrice = cursor.getInt(priceIndex);
 
+        cursor.close();
+
         productTextView.setText(productName);
-        shopTextView1.setText(productShop);
-        priceTextView1.setText(String.valueOf(productPrice));
+        shopTextView.setText(productShop);
+        priceTextView.setText(String.valueOf(productPrice));
       }
 
       public void launchEditor(MenuItem item){

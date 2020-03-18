@@ -8,11 +8,22 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="MainActivityContent" parent="AppTheme">
+    <style name="MainActivityContent">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_margin">12dp</item>
+        <item name="android:layout_margin">16dp</item>
         <item name="android:gravity">center</item>
+    </style>
+
+    <style name="ItemRowEntry">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center|center_horizontal</item>
+    </style>
+
+    <style name="CapitalRowItem" parent="ItemRowEntry">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Large</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>

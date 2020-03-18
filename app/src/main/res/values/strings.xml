@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">Shops\'N\'Prices</string>
+
     <string name="no_items">No items added</string>
     <string name="added_success">Product added</string>
     <string name="deleted_success">Product deleted</string>
@@ -7,4 +8,10 @@
     <string name="del_alert_message">Delete this product?</string>
     <string name="del_alert_positive">Yes</string>
     <string name="del_alert_negative">No</string>
+
+    <string name="info_activity_title">Product Info</string>
+    <string name="info_options_menu_title">Edit this product</string>
+    <string name="info_table_shops_title">Available at</string>
+    <string name="info_table_prices_title">At the price of</string>
+
 </resources>
