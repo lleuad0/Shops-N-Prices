@@ -1,4 +1,4 @@
-package com.example.shopsandprices;
+package com.github.lleuad0.shopsandprices;
 
 import org.junit.Test;
 

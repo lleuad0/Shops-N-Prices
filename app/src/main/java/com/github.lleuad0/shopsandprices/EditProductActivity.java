@@ -1,4 +1,4 @@
-package com.example.shopsandprices;
+package com.github.lleuad0.shopsandprices;
 
 import androidx.appcompat.app.AppCompatActivity;
 
