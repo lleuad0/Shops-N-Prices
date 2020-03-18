@@ -1,7 +1,6 @@
-package com.example.pricesbase;
+package com.example.shopsandprices;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.MenuBuilder;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -9,11 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ProductInfoActivity extends AppCompatActivity {
 

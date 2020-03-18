@@ -1,4 +1,4 @@
-package com.example.pricesbase;
+package com.example.shopsandprices;
 
 import org.junit.Test;
 

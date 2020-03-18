@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="no_items">Список пуст</string>
+    <string name="added_success">Продукт добавлен</string>
+    <string name="deleted_success">Продукт удалён</string>
+    <string name="del_alert_title">Удалить</string>
+    <string name="del_alert_message">Удалить этот продукт?</string>
+    <string name="del_alert_positive">Да</string>
+    <string name="del_alert_negative">Нет</string>
+</resources>
