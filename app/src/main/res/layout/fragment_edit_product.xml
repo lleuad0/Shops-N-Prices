@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditProductActivity">
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/productNameTitle"
@@ -18,7 +18,8 @@
         style="@style/EditActivityInput"
         android:hint="@string/product_name_hint"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productNameTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/productNameTitle"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/productShopTitle"
@@ -32,7 +33,8 @@
         style="@style/EditActivityInput"
         android:hint="@string/product_shop_hint"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productShopTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/productShopTitle"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/productPriceTitle"
@@ -46,12 +48,12 @@
         style="@style/EditActivityInputPrice"
         android:hint="@string/product_price_hint"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productPriceTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/productPriceTitle"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/saveButton"
         style="@style/EditActivityContent"
-        android:onClick="saveAndExit"
         android:text="@string/save_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/productPriceEditable" />

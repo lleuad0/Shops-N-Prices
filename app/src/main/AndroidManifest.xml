@@ -10,8 +10,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditProductActivity" android:label="@string/edit_activity_title"/>
-        <activity android:name=".ProductInfoActivity" android:label="@string/info_activity_title" />
         <activity android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
