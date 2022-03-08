@@ -1,9 +1,8 @@
-package com.github.lleuad0.shopsandprices.fragments
+package com.github.lleuad0.shopsandprices.fragments.list
 
 import android.app.AlertDialog
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteStatement
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,12 +11,15 @@ import android.widget.*
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.AdapterView.OnItemLongClickListener
 import androidx.fragment.app.Fragment
-import com.github.lleuad0.shopsandprices.MainActivity
+import androidx.fragment.app.viewModels
 import com.github.lleuad0.shopsandprices.R
 import com.github.lleuad0.shopsandprices.databinding.FragmentListBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ListFragment : Fragment() {
     private var binding: FragmentListBinding? = null
+    private val viewModel: ListViewModel by viewModels()
 
     private var sqLiteDatabase: SQLiteDatabase? = null
     private var arrayAdapter: ArrayAdapter<*>? = null

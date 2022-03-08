@@ -1,15 +1,19 @@
-package com.github.lleuad0.shopsandprices.fragments
+package com.github.lleuad0.shopsandprices.fragments.product_info
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.github.lleuad0.shopsandprices.databinding.FragmentEditProductBinding
 import com.github.lleuad0.shopsandprices.databinding.FragmentProductInfoBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProductInfoFragment : Fragment() {
-    var binding: FragmentProductInfoBinding? = null
+    private var binding: FragmentProductInfoBinding? = null
+    private val viewModel: ProductInfoViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
