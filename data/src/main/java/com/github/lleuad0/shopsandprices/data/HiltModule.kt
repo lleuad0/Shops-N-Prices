@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.github.lleuad0.shopsandprices.domain.LocalRepository
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,11 +16,18 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class HiltModule {
+abstract class HiltModule {
 
-    @Provides
-    @Singleton
-    fun providesDao(@ApplicationContext context: Context): ProductDao{
-        return Room.databaseBuilder(context, Database::class.java,"database").build().productDao()
+    @Binds
+    abstract fun bindsLocalRepository(localRepositoryImpl: LocalRepositoryImpl): LocalRepository
+
+    companion object {
+
+        @Provides
+        @Singleton
+        fun providesProductDao(@ApplicationContext context: Context): ProductDao {
+            return Room.databaseBuilder(context, Database::class.java, "database").build()
+                .productDao()
+        }
     }
 }

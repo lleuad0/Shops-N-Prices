@@ -12,9 +12,15 @@ import android.widget.AdapterView.OnItemClickListener
 import android.widget.AdapterView.OnItemLongClickListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.github.lleuad0.shopsandprices.R
 import com.github.lleuad0.shopsandprices.databinding.FragmentListBinding
+import com.github.lleuad0.shopsandprices.domain.Product
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ListFragment : Fragment() {
@@ -43,53 +49,34 @@ class ListFragment : Fragment() {
             it.setOnClickListener { addProduct() }
         }
 
-        productsList = loadFromDatabase()
-        arrayAdapter = ArrayAdapter<Any?>(
-            requireContext(),
-            android.R.layout.simple_list_item_1,
-            productsList!! as List<Any?>
-        )
-        binding?.productsListView?.adapter = arrayAdapter
+        lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.stateFlow.collectLatest {
+                    val arrayAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, it.products)
+                    binding?.productsListView?.adapter = arrayAdapter
+
+                    if (it.products.isEmpty()){
+                        showEmptyMessage()
+                    }
+                    else{
+                        showProductsList()
+                    }
+                }
+            }
+        }
+        viewModel.getAllData()
 
         val productListener = ProductListener(requireContext())
         binding?.productsListView?.onItemClickListener = productListener
         binding?.productsListView?.onItemLongClickListener = productListener
     }
 
-    private fun loadFromDatabase(): java.util.ArrayList<String> {
-        sqLiteDatabase =
-            requireActivity().openOrCreateDatabase("Prices", Context.MODE_PRIVATE, null)
-        sqLiteDatabase!!.execSQL("CREATE TABLE IF NOT EXISTS Prices (Product VARCHAR, Price INT, Shop VARCHAR)")
-        val cursor = sqLiteDatabase!!.rawQuery("SELECT * FROM Prices", null)
-        cursor.moveToFirst()
-        val productIndex = cursor.getColumnIndex("Product")
-        val products = java.util.ArrayList<String>()
-        while (!cursor.isAfterLast) {
-            products.add(cursor.getString(productIndex))
-            cursor.moveToNext()
-        }
-        cursor.close()
-        if (products.isEmpty()) {
-            showEmptyMessage()
-        }
-        return products
-    }
-
     private fun addProduct() {
-        if (productsList!!.isEmpty()) {
-            showProductsList()
-        }
         val newProductName = "test product " + testCount++
-        val newProductPrice = "test price"
-        val newProductShop = "test shop"
-        val sqLiteStatement =
-            sqLiteDatabase!!.compileStatement("INSERT INTO Prices (Product, Price, Shop) VALUES (?,?,?)")
-        sqLiteStatement.bindString(1, newProductName)
-        sqLiteStatement.bindString(2, newProductPrice)
-        sqLiteStatement.bindString(3, newProductShop)
-        sqLiteStatement.execute()
-        productsList!!.add(newProductName)
-        arrayAdapter!!.notifyDataSetChanged()
+        val newProductPrice = 1.5
+        val newProductShop = arrayListOf("test shop")
+        val product = Product(newProductName,newProductPrice,newProductShop)
+        viewModel.addProduct(product)
     }
 
     class ProductListener(private val context: Context) : OnItemClickListener,
