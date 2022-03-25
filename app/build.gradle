@@ -34,7 +34,7 @@ dependencies {
     implementation project(path: ':domain')
 
     def fragment_version = "1.4.1"
-    def lifecycle_version = "2.5.0-alpha03"
+    def lifecycle_version = '2.5.0-alpha05'
 
     implementation 'androidx.navigation:navigation-fragment-ktx:2.4.1'
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.1'
@@ -48,6 +48,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    implementation 'com.jakewharton.timber:timber:5.0.1'
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
 

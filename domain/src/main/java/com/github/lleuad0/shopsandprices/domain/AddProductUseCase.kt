@@ -4,9 +4,11 @@ import javax.inject.Inject
 
 class AddProductUseCase @Inject constructor(private val localRepository: LocalRepository) :
     UseCase<Unit>() {
-    lateinit var product: Product
+    lateinit var productName: String
+    var productPrice: Double = -1.0
+    lateinit var productShops: ArrayList<String>
 
     override suspend fun execute() {
-        return localRepository.addProduct(product)
+        return localRepository.addProduct(Product(productName, productPrice, productShops))
     }
 }

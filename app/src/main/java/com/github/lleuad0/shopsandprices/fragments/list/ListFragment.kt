@@ -2,22 +2,24 @@ package com.github.lleuad0.shopsandprices.fragments.list
 
 import android.app.AlertDialog
 import android.content.Context
-import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.AdapterView.OnItemLongClickListener
+import android.widget.ArrayAdapter
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.github.lleuad0.shopsandprices.R
 import com.github.lleuad0.shopsandprices.databinding.FragmentListBinding
-import com.github.lleuad0.shopsandprices.domain.Product
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -26,12 +28,6 @@ import kotlinx.coroutines.launch
 class ListFragment : Fragment() {
     private var binding: FragmentListBinding? = null
     private val viewModel: ListViewModel by viewModels()
-
-    private var sqLiteDatabase: SQLiteDatabase? = null
-    private var arrayAdapter: ArrayAdapter<*>? = null
-    private var productsList: ArrayList<String>? = null
-
-    private var testCount = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,7 +42,7 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding?.addProductButton?.let {
             it.setImageResource(R.drawable.ic_plus)
-            it.setOnClickListener { addProduct() }
+            it.setOnClickListener { findNavController().navigate(R.id.editFromList) }
         }
 
         lifecycleScope.launch {
@@ -69,14 +65,6 @@ class ListFragment : Fragment() {
         val productListener = ProductListener(requireContext())
         binding?.productsListView?.onItemClickListener = productListener
         binding?.productsListView?.onItemLongClickListener = productListener
-    }
-
-    private fun addProduct() {
-        val newProductName = "test product " + testCount++
-        val newProductPrice = 1.5
-        val newProductShop = arrayListOf("test shop")
-        val product = Product(newProductName,newProductPrice,newProductShop)
-        viewModel.addProduct(product)
     }
 
     class ProductListener(private val context: Context) : OnItemClickListener,
