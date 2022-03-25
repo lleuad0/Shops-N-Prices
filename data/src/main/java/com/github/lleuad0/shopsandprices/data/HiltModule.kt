@@ -1,16 +1,14 @@
 package com.github.lleuad0.shopsandprices.data
 
 import android.content.Context
-import androidx.lifecycle.ViewModel
 import androidx.room.Room
-import androidx.room.RoomDatabase
+import com.github.lleuad0.shopsandprices.data.dao.ProductDao
 import com.github.lleuad0.shopsandprices.domain.LocalRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 

@@ -1,5 +1,6 @@
 package com.github.lleuad0.shopsandprices.data
 
+import com.github.lleuad0.shopsandprices.data.dao.ProductDao
 import com.github.lleuad0.shopsandprices.domain.LocalRepository
 import com.github.lleuad0.shopsandprices.domain.Product
 import javax.inject.Inject

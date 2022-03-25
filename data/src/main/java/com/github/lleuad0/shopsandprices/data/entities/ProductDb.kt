@@ -1,4 +1,4 @@
-package com.github.lleuad0.shopsandprices.data
+package com.github.lleuad0.shopsandprices.data.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -10,5 +10,5 @@ data class ProductDb(
     @ColumnInfo(name = "price") val price: Double,
     @ColumnInfo(name = "shops") val shops: String,
 
-    @PrimaryKey(autoGenerate = true) val productId: Int = 0,
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "product_id") val productId: Int = 0,
 )
