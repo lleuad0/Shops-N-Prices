@@ -6,9 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.github.lleuad0.shopsandprices.databinding.FragmentProductInfoBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ProductInfoFragment : Fragment() {
@@ -23,6 +28,20 @@ class ProductInfoFragment : Fragment() {
     ): View? {
         binding = FragmentProductInfoBinding.inflate(inflater)
         return binding?.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.stateFlow.collectLatest {
+                    binding?.shopTextView?.text = it.shopsAndPricesMap.keys.toString()
+                    binding?.priceTextView?.text = it.shopsAndPricesMap.values.toString()
+                }
+            }
+        }
+        viewModel.getDataForProduct(args.productId)
     }
 
     override fun onDestroyView() {

@@ -14,4 +14,5 @@ interface LocalRepository {
     suspend fun getShopByName(shopName: String): Shop
 
     suspend fun addPrice(product: Product, shop: Shop, price: Double)
+    suspend fun getShopsAndPricesByProductId(productId: Int): Map<String, Double>
 }

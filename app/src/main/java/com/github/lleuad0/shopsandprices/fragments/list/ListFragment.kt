@@ -77,6 +77,7 @@ class ListFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding?.productsRecyclerView?.adapter = null
         binding = null
     }
 }

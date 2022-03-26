@@ -44,4 +44,8 @@ class LocalRepositoryImpl @Inject constructor(
     override suspend fun addPrice(product: Product, shop: Shop, price: Double) {
         return priceDao.insertPrice(PriceDb(product.id, shop.id, price))
     }
+
+    override suspend fun getShopsAndPricesByProductId(productId: Int): Map<String, Double> {
+        return priceDao.selectPrices(productId)
+    }
 }
