@@ -2,7 +2,9 @@ package com.github.lleuad0.shopsandprices.data
 
 import android.content.Context
 import androidx.room.Room
+import com.github.lleuad0.shopsandprices.data.dao.PriceDao
 import com.github.lleuad0.shopsandprices.data.dao.ProductDao
+import com.github.lleuad0.shopsandprices.data.dao.ShopDao
 import com.github.lleuad0.shopsandprices.domain.LocalRepository
 import dagger.Binds
 import dagger.Module
@@ -23,9 +25,26 @@ abstract class HiltModule {
 
         @Provides
         @Singleton
-        fun providesProductDao(@ApplicationContext context: Context): ProductDao {
+        fun providesDatabase(@ApplicationContext context: Context): Database {
             return Room.databaseBuilder(context, Database::class.java, "database").build()
-                .productDao()
+        }
+
+        @Provides
+        @Singleton
+        fun providesProductDao(database: Database): ProductDao {
+            return database.productDao()
+        }
+
+        @Provides
+        @Singleton
+        fun providesShopDao(database: Database): ShopDao {
+            return database.shopDao()
+        }
+
+        @Provides
+        @Singleton
+        fun providesPriceDao(database: Database): PriceDao {
+            return database.priceDao()
         }
     }
 }

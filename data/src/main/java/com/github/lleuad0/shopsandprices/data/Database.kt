@@ -2,6 +2,7 @@ package com.github.lleuad0.shopsandprices.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.github.lleuad0.shopsandprices.data.dao.PriceDao
 import com.github.lleuad0.shopsandprices.data.dao.ProductDao
 import com.github.lleuad0.shopsandprices.data.dao.ShopDao
 import com.github.lleuad0.shopsandprices.data.entities.PriceDb
@@ -12,4 +13,5 @@ import com.github.lleuad0.shopsandprices.data.entities.ShopDb
 abstract class Database: RoomDatabase() {
     abstract fun productDao(): ProductDao
     abstract fun shopDao(): ShopDao
+    abstract fun priceDao(): PriceDao
 }
