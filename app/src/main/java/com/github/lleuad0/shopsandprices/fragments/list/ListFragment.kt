@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import androidx.paging.PagingData
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.lleuad0.shopsandprices.ProductListAdapter
 import com.github.lleuad0.shopsandprices.R
@@ -24,9 +25,9 @@ import kotlinx.coroutines.launch
 class ListFragment : Fragment() {
     private var binding: FragmentListBinding? = null
     private val viewModel: ListViewModel by viewModels()
-    private val adapter = ProductListAdapter {
+    private val adapter = ProductListAdapter({
         findNavController().navigate(ListFragmentDirections.showInfoFromList(it.id))
-    }
+    }) { deleteProduct(it) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,15 +52,34 @@ class ListFragment : Fragment() {
         lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.stateFlow.collectLatest {
-                    it.products.collectLatest { data ->
-                        if (data == PagingData.empty<Product>()) {
-                            showEmptyMessage()
-                        } else {
-                            showProductsList()
-                        }
-                        adapter.submitData(data)
+                    it.products.collectLatest { data -> adapter.submitData(data) }
+                    if (it.isProductDeleted) {
+                        Toast.makeText(
+                            context,
+                            requireContext().resources.getString(R.string.deleted_success),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        viewModel.onDeleted()
                     }
                 }
+            }
+        }
+        lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                adapter.loadStateFlow.collectLatest {
+                    when {
+                        it.prepend.endOfPaginationReached && adapter.itemCount == 0 -> {
+                            showEmptyMessage()
+                        }
+                        it.refresh is LoadState.Error -> {
+                            showEmptyMessage()
+                        }
+                        else -> {
+                            showProductsList()
+                        }
+                    }
+                }
+
             }
         }
         viewModel.getAllData()
@@ -73,6 +93,10 @@ class ListFragment : Fragment() {
     private fun showProductsList() {
         binding?.noItemsTextView?.visibility = View.GONE
         binding?.productsRecyclerView?.visibility = View.VISIBLE
+    }
+
+    private fun deleteProduct(product: Product) {
+        viewModel.deleteProduct(product)
     }
 
     override fun onDestroyView() {

@@ -33,6 +33,10 @@ class LocalRepositoryImpl @Inject constructor(
         return productDao.getProductByName(productName).toUi()
     }
 
+    override suspend fun removeProduct(product: Product) {
+        return productDao.removeProduct(product.toDb())
+    }
+
     override suspend fun addShop(shop: Shop) {
         return shopDao.insertShop(shop.toDb())
     }
