@@ -1,0 +1,12 @@
+package com.github.lleuad0.shopsandprices.data.entities
+
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "shops")
+data class ShopDb(
+    @ColumnInfo(name = "shop_name") val shopName: String,
+
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "shop_id") val shopId: Int = 0,
+)
