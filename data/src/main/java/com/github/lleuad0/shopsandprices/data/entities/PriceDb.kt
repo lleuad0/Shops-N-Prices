@@ -16,6 +16,6 @@ import androidx.room.ForeignKey
 )
 data class PriceDb(
     @ColumnInfo(name = "product_id") val productId: Int,
-    @ColumnInfo(name = "shop_id") val shopId: Int,
+    @ColumnInfo(name = "shop_id", index = true) val shopId: Int,
     @ColumnInfo(name = "price") val price: Double,
 )

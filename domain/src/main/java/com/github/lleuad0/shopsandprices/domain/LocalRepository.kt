@@ -1,7 +1,12 @@
 package com.github.lleuad0.shopsandprices.domain
 
+import androidx.paging.PagingData
+import com.github.lleuad0.shopsandprices.domain.model.Product
+import com.github.lleuad0.shopsandprices.domain.model.Shop
+import kotlinx.coroutines.flow.Flow
+
 interface LocalRepository {
-    suspend fun getAllProducts(): Array<Product>
+    suspend fun getAllProducts(): Flow<PagingData<Product>>
     suspend fun addProduct(product: Product)
     suspend fun getProductByName(productName: String): Product
 

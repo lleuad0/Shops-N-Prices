@@ -1,7 +1,7 @@
 package com.github.lleuad0.shopsandprices.fragments.edit_product
 
 import androidx.lifecycle.ViewModel
-import com.github.lleuad0.shopsandprices.domain.AddProductUseCase
+import com.github.lleuad0.shopsandprices.domain.usecase.AddProductUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update

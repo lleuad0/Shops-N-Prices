@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.github.lleuad0.shopsandprices.databinding.FragmentEditProductBinding
+import androidx.navigation.fragment.navArgs
 import com.github.lleuad0.shopsandprices.databinding.FragmentProductInfoBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -14,6 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ProductInfoFragment : Fragment() {
     private var binding: FragmentProductInfoBinding? = null
     private val viewModel: ProductInfoViewModel by viewModels()
+    private val args by navArgs<ProductInfoFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater,

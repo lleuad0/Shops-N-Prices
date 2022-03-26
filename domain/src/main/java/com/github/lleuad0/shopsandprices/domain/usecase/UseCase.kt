@@ -1,4 +1,4 @@
-package com.github.lleuad0.shopsandprices.domain
+package com.github.lleuad0.shopsandprices.domain.usecase
 
 import kotlinx.coroutines.*
 

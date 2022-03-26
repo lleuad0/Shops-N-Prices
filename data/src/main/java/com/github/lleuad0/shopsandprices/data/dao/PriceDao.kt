@@ -1,5 +1,6 @@
 package com.github.lleuad0.shopsandprices.data.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -15,5 +16,5 @@ interface PriceDao {
     fun removePrice(priceDb: PriceDb)
 
     @Query("SELECT * FROM prices")
-    fun selectAll(): Array<PriceDb>
+    fun selectAll(): PagingSource<Int, PriceDb>
 }

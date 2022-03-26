@@ -1,5 +1,8 @@
-package com.github.lleuad0.shopsandprices.domain
+package com.github.lleuad0.shopsandprices.domain.usecase
 
+import com.github.lleuad0.shopsandprices.domain.LocalRepository
+import com.github.lleuad0.shopsandprices.domain.model.Product
+import com.github.lleuad0.shopsandprices.domain.model.Shop
 import javax.inject.Inject
 
 class AddProductUseCase @Inject constructor(private val localRepository: LocalRepository) :

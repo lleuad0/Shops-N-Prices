@@ -1,5 +1,6 @@
 package com.github.lleuad0.shopsandprices.data.dao
 
+import androidx.paging.PagingSource
 import androidx.room.*
 import com.github.lleuad0.shopsandprices.data.entities.ShopDb
 
@@ -15,5 +16,5 @@ interface ShopDao {
     fun getShopByName(shopName: String): ShopDb
 
     @Query("SELECT * FROM shops")
-    fun selectAll(): Array<ShopDb>
+    fun selectAll(): PagingSource<Int, ShopDb>
 }

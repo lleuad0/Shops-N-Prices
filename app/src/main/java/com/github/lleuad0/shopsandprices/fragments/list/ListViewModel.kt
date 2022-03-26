@@ -1,9 +1,13 @@
 package com.github.lleuad0.shopsandprices.fragments.list
 
 import androidx.lifecycle.ViewModel
-import com.github.lleuad0.shopsandprices.domain.GetAllProductsUseCase
-import com.github.lleuad0.shopsandprices.domain.Product
+import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.github.lleuad0.shopsandprices.domain.model.Product
+import com.github.lleuad0.shopsandprices.domain.usecase.GetAllProductsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
@@ -12,27 +16,16 @@ import javax.inject.Inject
 class ListViewModel @Inject constructor(
     private val getAllProductsUseCase: GetAllProductsUseCase,
 ) : ViewModel() {
-    data class ListUiState(val products: Array<Product> = emptyArray()) {
-        override fun equals(other: Any?): Boolean {
-            if (this === other) return true
-            if (javaClass != other?.javaClass) return false
-
-            other as ListUiState
-
-            if (!products.contentEquals(other.products)) return false
-
-            return true
-        }
-
-        override fun hashCode(): Int {
-            return products.contentHashCode()
-        }
-    }
+    data class ListUiState(val products: Flow<PagingData<Product>> = MutableStateFlow(PagingData.empty()))
 
     val stateFlow = MutableStateFlow(ListUiState())
 
     fun getAllData() {
-        getAllProductsUseCase.runOnBackground { stateFlow.update { state -> state.copy(products = it) } }
+        getAllProductsUseCase.runOnBackground {
+            stateFlow.update { state ->
+                state.copy(products = it.cachedIn(viewModelScope))
+            }
+        }
     }
 
     override fun onCleared() {
