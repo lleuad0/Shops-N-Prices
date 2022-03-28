@@ -1,6 +1,7 @@
 package com.github.lleuad0.shopsandprices.fragments.product_info
 
 import androidx.lifecycle.ViewModel
+import com.github.lleuad0.shopsandprices.domain.model.Price
 import com.github.lleuad0.shopsandprices.domain.model.Product
 import com.github.lleuad0.shopsandprices.domain.usecase.GetProductByIdUseCase
 import com.github.lleuad0.shopsandprices.domain.usecase.GetShopsAndPricesByProductIdUseCase
@@ -16,7 +17,7 @@ class ProductInfoViewModel @Inject constructor(
 ) : ViewModel() {
     data class InfoUiState(
         val product: Product? = null,
-        val shopsAndPricesMap: Map<String, Double> = mapOf()
+        val shopsAndPrices: List<Price> = listOf(),
     )
 
     val stateFlow = MutableStateFlow(InfoUiState())
@@ -32,7 +33,7 @@ class ProductInfoViewModel @Inject constructor(
     fun getDataForProduct(productId: Int) {
         getShopsAndPricesByProductIdUseCase.apply {
             this.productId = productId
-        }.runOnBackground { stateFlow.update { state -> state.copy(shopsAndPricesMap = it) } }
+        }.runOnBackground { stateFlow.update { state -> state.copy(shopsAndPrices = it) } }
     }
 
     override fun onCleared() {

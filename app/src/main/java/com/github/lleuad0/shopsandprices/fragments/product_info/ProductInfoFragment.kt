@@ -10,6 +10,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.lleuad0.shopsandprices.PriceAdapter
 import com.github.lleuad0.shopsandprices.databinding.FragmentProductInfoBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -20,6 +22,7 @@ class ProductInfoFragment : Fragment() {
     private var binding: FragmentProductInfoBinding? = null
     private val viewModel: ProductInfoViewModel by viewModels()
     private val args by navArgs<ProductInfoFragmentArgs>()
+    private val adapter = PriceAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,13 +35,16 @@ class ProductInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding?.recyclerView?.let {
+            it.layoutManager = LinearLayoutManager(requireContext())
+            it.adapter = adapter
+        }
 
         lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.stateFlow.collectLatest {
-                    binding?.productTitleTextView?.text = it.product?.name
-                    binding?.shopTextView?.text = it.shopsAndPricesMap.keys.toString()
-                    binding?.priceTextView?.text = it.shopsAndPricesMap.values.toString()
+                    binding?.productTitle?.text = it.product?.name
+                    adapter.setData(it.shopsAndPrices)
                 }
             }
         }
@@ -50,6 +56,7 @@ class ProductInfoFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding?.recyclerView?.adapter = null
         binding = null
     }
 }

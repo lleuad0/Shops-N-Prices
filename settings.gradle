@@ -1,4 +1,4 @@
 include ':app'
-rootProject.name='Prices Base'
+rootProject.name='Shops\'n\'Prices'
 include ':data'
 include ':domain'

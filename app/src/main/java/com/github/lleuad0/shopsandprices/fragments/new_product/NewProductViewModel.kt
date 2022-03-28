@@ -1,4 +1,4 @@
-package com.github.lleuad0.shopsandprices.fragments.edit_product
+package com.github.lleuad0.shopsandprices.fragments.new_product
 
 import androidx.lifecycle.ViewModel
 import com.github.lleuad0.shopsandprices.domain.usecase.AddProductUseCase
@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-class EditProductViewModel @Inject constructor(private val addProductUseCase: AddProductUseCase) :
+class NewProductViewModel @Inject constructor(private val addProductUseCase: AddProductUseCase) :
     ViewModel() {
     data class EditUiState(val isSaved: Boolean = false)
 

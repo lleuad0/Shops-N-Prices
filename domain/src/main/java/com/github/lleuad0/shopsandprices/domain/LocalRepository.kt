@@ -1,6 +1,7 @@
 package com.github.lleuad0.shopsandprices.domain
 
 import androidx.paging.PagingData
+import com.github.lleuad0.shopsandprices.domain.model.Price
 import com.github.lleuad0.shopsandprices.domain.model.Product
 import com.github.lleuad0.shopsandprices.domain.model.Shop
 import kotlinx.coroutines.flow.Flow
@@ -16,5 +17,5 @@ interface LocalRepository {
     suspend fun getShopByName(shopName: String): Shop
 
     suspend fun addPrice(product: Product, shop: Shop, price: Double)
-    suspend fun getShopsAndPricesByProductId(productId: Int): Map<String, Double>
+    suspend fun getShopsAndPricesByProductId(productId: Int): List<Price>
 }

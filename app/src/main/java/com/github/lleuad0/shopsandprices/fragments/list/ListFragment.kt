@@ -42,7 +42,7 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding?.addProductButton?.let {
             it.setImageResource(R.drawable.ic_plus)
-            it.setOnClickListener { findNavController().navigate(R.id.editFromList) }
+            it.setOnClickListener { findNavController().navigate(R.id.addNewFromList) }
         }
         binding?.productsRecyclerView?.let {
             it.layoutManager = LinearLayoutManager(requireContext())

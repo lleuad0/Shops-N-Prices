@@ -3,6 +3,7 @@ package com.github.lleuad0.shopsandprices.data.dao
 import androidx.paging.PagingSource
 import androidx.room.*
 import com.github.lleuad0.shopsandprices.data.entities.PriceDb
+import com.github.lleuad0.shopsandprices.data.entities.ShopAndPrice
 
 @Dao
 interface PriceDao {
@@ -15,11 +16,12 @@ interface PriceDao {
     @Query("SELECT * FROM prices")
     fun selectAll(): PagingSource<Int, PriceDb>
 
-    @MapInfo(keyColumn = "shopName", valueColumn = "priceValue")
+    @Transaction
+    @RewriteQueriesToDropUnusedColumns
     @Query(
-        "SELECT shop_name AS shopName, price AS priceValue FROM prices " +
-                "JOIN shops ON shops.shop_id = prices.id_shop " +
+        "SELECT * FROM prices JOIN shops " +
+                "ON shops.shop_id = prices.id_shop " +
                 "WHERE id_product = :productId"
     )
-    fun selectPrices(productId: Int): Map<String, Double>
+    fun selectPrices(productId: Int): List<ShopAndPrice>
 }

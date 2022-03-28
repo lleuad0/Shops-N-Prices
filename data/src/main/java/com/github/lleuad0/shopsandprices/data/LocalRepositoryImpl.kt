@@ -9,6 +9,7 @@ import com.github.lleuad0.shopsandprices.data.dao.ProductDao
 import com.github.lleuad0.shopsandprices.data.dao.ShopDao
 import com.github.lleuad0.shopsandprices.data.entities.PriceDb
 import com.github.lleuad0.shopsandprices.domain.LocalRepository
+import com.github.lleuad0.shopsandprices.domain.model.Price
 import com.github.lleuad0.shopsandprices.domain.model.Product
 import com.github.lleuad0.shopsandprices.domain.model.Shop
 import kotlinx.coroutines.flow.Flow
@@ -53,7 +54,7 @@ class LocalRepositoryImpl @Inject constructor(
         return priceDao.insertPrice(PriceDb(product.id, shop.id, price))
     }
 
-    override suspend fun getShopsAndPricesByProductId(productId: Int): Map<String, Double> {
-        return priceDao.selectPrices(productId)
+    override suspend fun getShopsAndPricesByProductId(productId: Int): List<Price> {
+        return priceDao.selectPrices(productId).map { it.toUi() }
     }
 }

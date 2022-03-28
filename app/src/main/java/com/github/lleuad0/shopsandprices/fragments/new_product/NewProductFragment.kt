@@ -1,4 +1,4 @@
-package com.github.lleuad0.shopsandprices.fragments.edit_product
+package com.github.lleuad0.shopsandprices.fragments.new_product
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,22 +10,22 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.github.lleuad0.shopsandprices.databinding.FragmentEditProductBinding
+import com.github.lleuad0.shopsandprices.databinding.FragmentNewProductBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class EditProductFragment : Fragment() {
-    var binding: FragmentEditProductBinding? = null
-    private val viewModel: EditProductViewModel by viewModels()
+class NewProductFragment : Fragment() {
+    var binding: FragmentNewProductBinding? = null
+    private val viewModel: NewProductViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentEditProductBinding.inflate(inflater)
+        binding = FragmentNewProductBinding.inflate(inflater)
         return binding?.root
     }
 
