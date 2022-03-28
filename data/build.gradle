@@ -33,12 +33,12 @@ android {
 
 dependencies {
     implementation project(path: ':domain')
-    def room_version = "2.4.2"
+    def room_version = "2.5.0-alpha01"
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'androidx.room:room-paging:2.5.0-alpha01'
     implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-paging:$room_version"
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
     implementation "com.google.dagger:hilt-android:$hilt_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"

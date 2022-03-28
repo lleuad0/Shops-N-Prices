@@ -36,12 +36,16 @@ class ProductInfoFragment : Fragment() {
         lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.stateFlow.collectLatest {
+                    binding?.productTitleTextView?.text = it.product?.name
                     binding?.shopTextView?.text = it.shopsAndPricesMap.keys.toString()
                     binding?.priceTextView?.text = it.shopsAndPricesMap.values.toString()
                 }
             }
         }
-        viewModel.getDataForProduct(args.productId)
+        args.productId.let {
+            viewModel.getProduct(it)
+            viewModel.getDataForProduct(it)
+        }
     }
 
     override fun onDestroyView() {
