@@ -10,7 +10,7 @@ interface ProductDao {
     fun insertProduct(productDb: ProductDb)
 
     @Query("SELECT * from products WHERE product_name=:productName LIMIT 1")
-    fun getProductByName(productName: String): ProductDb
+    fun getProductByName(productName: String): ProductDb?
 
     @Delete
     fun removeProduct(productDb: ProductDb)

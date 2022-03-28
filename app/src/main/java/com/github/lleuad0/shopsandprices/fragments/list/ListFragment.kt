@@ -53,6 +53,12 @@ class ListFragment : Fragment() {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.stateFlow.collectLatest {
                     it.products.collectLatest { data -> adapter.submitData(data) }
+                }
+            }
+        }
+        lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.stateFlow.collectLatest {
                     if (it.isProductDeleted) {
                         Toast.makeText(
                             context,
