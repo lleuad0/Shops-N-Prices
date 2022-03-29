@@ -20,8 +20,8 @@ interface PriceDao {
     @RewriteQueriesToDropUnusedColumns
     @Query(
         "SELECT * FROM prices JOIN shops " +
-                "ON shops.shop_name = prices.name_shop " +
-                "WHERE name_product = :productName"
+                "ON shops.shop_id = prices.id_shop " +
+                "WHERE id_product = :productId"
     )
-    fun selectPrices(productName: String): List<ShopAndPrice>
+    fun selectPrices(productId: Int): List<ShopAndPrice>
 }

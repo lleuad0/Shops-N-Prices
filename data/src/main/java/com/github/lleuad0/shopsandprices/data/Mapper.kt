@@ -7,12 +7,12 @@ import com.github.lleuad0.shopsandprices.domain.model.Price
 import com.github.lleuad0.shopsandprices.domain.model.Product
 import com.github.lleuad0.shopsandprices.domain.model.Shop
 
-fun ProductDb.toUi() = Product(productName, productInfo)
+fun ProductDb.toUi() = Product(productName, productInfo, productId)
 
-fun Product.toDb() = ProductDb(name, additionalInfo)
+fun Product.toDb() = ProductDb(name, additionalInfo, id)
 
-fun ShopDb.toUi() = Shop(shopName, shopInfo)
+fun ShopDb.toUi() = Shop(shopName, shopInfo, shopId)
 
-fun Shop.toDb() = ShopDb(name, additionalInfo)
+fun Shop.toDb() = ShopDb(name, additionalInfo, id)
 
 fun ShopAndPrice.toUi() = Price(price.price, shop.toUi())
