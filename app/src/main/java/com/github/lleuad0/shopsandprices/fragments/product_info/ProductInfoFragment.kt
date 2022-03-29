@@ -48,7 +48,7 @@ class ProductInfoFragment : Fragment() {
                 }
             }
         }
-        args.productName.let {
+        args.productId.let {
             viewModel.getProduct(it)
             viewModel.getDataForProduct(it)
         }

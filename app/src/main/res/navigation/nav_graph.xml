@@ -15,7 +15,11 @@
             app:destination="@id/newProductFragment" />
         <action
             android:id="@+id/showInfoFromList"
-            app:destination="@id/productInfoFragment" />
+            app:destination="@id/productInfoFragment">
+            <argument
+                android:name="productId"
+                app:argType="integer" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/newProductFragment"
@@ -28,7 +32,7 @@
         android:label="ProductInfoFragment"
         tools:layout="@layout/fragment_product_info">
         <argument
-            android:name="productName"
-            app:argType="string" />
+            android:name="productId"
+            app:argType="integer" />
     </fragment>
 </navigation>
