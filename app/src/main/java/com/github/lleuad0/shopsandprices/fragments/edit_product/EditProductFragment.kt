@@ -1,9 +1,11 @@
-package com.github.lleuad0.shopsandprices.fragments.product_info
+package com.github.lleuad0.shopsandprices.fragments.edit_product
 
 import android.os.Bundle
+import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -12,25 +14,26 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.lleuad0.shopsandprices.PriceAdapter
-import com.github.lleuad0.shopsandprices.databinding.FragmentProductInfoBinding
+import com.github.lleuad0.shopsandprices.PriceEditAdapter
+import com.github.lleuad0.shopsandprices.R
+import com.github.lleuad0.shopsandprices.databinding.FragmentProductEditBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ProductInfoFragment : Fragment() {
-    private var binding: FragmentProductInfoBinding? = null
-    private val viewModel: ProductInfoViewModel by viewModels()
-    private val args by navArgs<ProductInfoFragmentArgs>()
-    private val adapter = PriceAdapter()
+class EditProductFragment : Fragment() {
+    private var binding: FragmentProductEditBinding? = null
+    private val viewModel: EditProductViewModel by viewModels()
+    private val args by navArgs<EditProductFragmentArgs>()
+    private val adapter = PriceEditAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentProductInfoBinding.inflate(inflater)
+        binding = FragmentProductEditBinding.inflate(inflater)
         return binding?.root
     }
 
@@ -40,16 +43,30 @@ class ProductInfoFragment : Fragment() {
             it.layoutManager = LinearLayoutManager(requireContext())
             it.adapter = adapter
         }
-        binding?.editButton?.setOnClickListener {
-            findNavController().navigate(ProductInfoFragmentDirections.editProduct(args.productId))
+        binding?.saveButton?.setOnClickListener {
+            viewModel.saveProductData(
+                binding?.productTitle?.text?.toString(),
+                binding?.productInfo?.text?.toString(),
+                adapter.exportChangedData()
+            )
         }
 
         lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.stateFlow.collectLatest {
-                    binding?.productTitle?.text = it.product?.name
-                    binding?.productInfo?.text = it.product?.additionalInfo
+                    binding?.productTitle?.text = SpannableStringBuilder(it.product?.name ?: "")
+                    binding?.productInfo?.text =
+                        SpannableStringBuilder(it.product?.additionalInfo ?: "")
                     adapter.setData(it.shopsAndPrices)
+
+                    if (it.isSaved) {
+                        Toast.makeText(
+                            requireContext(),
+                            requireContext().getText(R.string.added_success),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        findNavController().popBackStack()
+                    }
                 }
             }
         }

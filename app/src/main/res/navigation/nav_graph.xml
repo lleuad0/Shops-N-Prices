@@ -15,11 +15,7 @@
             app:destination="@id/newProductFragment" />
         <action
             android:id="@+id/showInfoFromList"
-            app:destination="@id/productInfoFragment">
-            <argument
-                android:name="productId"
-                app:argType="integer" />
-        </action>
+            app:destination="@id/productInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/newProductFragment"
@@ -31,6 +27,18 @@
         android:name="com.github.lleuad0.shopsandprices.fragments.product_info.ProductInfoFragment"
         android:label="ProductInfoFragment"
         tools:layout="@layout/fragment_product_info">
+        <argument
+            android:name="productId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/editProduct"
+            app:destination="@id/editProductFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProductFragment"
+        android:name="com.github.lleuad0.shopsandprices.fragments.edit_product.EditProductFragment"
+        android:label="EditProductFragment"
+        tools:layout="@layout/fragment_product_edit">
         <argument
             android:name="productId"
             app:argType="integer" />

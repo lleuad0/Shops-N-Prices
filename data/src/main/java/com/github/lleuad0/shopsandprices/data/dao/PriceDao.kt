@@ -10,8 +10,11 @@ interface PriceDao {
     @Insert
     fun insertPrice(priceDb: PriceDb)
 
+    @Update
+    fun updatePrice(priceDb: PriceDb)
+
     @Delete
-    fun removePrice(priceDb: PriceDb)
+    fun deletePrice(priceDb: PriceDb)
 
     @Query("SELECT * FROM prices")
     fun selectAll(): PagingSource<Int, PriceDb>

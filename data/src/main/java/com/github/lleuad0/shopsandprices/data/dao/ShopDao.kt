@@ -9,8 +9,11 @@ interface ShopDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertShop(shopDb: ShopDb)
 
+    @Update
+    fun updateShop(shopDb: ShopDb)
+
     @Delete
-    fun removeShop(shopDb: ShopDb)
+    fun deleteShop(shopDb: ShopDb)
 
     @Query("SELECT * from shops WHERE shop_name=:shopName LIMIT 1")
     fun getShopByName(shopName: String): ShopDb

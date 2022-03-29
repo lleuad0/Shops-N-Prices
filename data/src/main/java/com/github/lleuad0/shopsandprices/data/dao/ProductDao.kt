@@ -9,6 +9,9 @@ interface ProductDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertProduct(productDb: ProductDb)
 
+    @Update
+    fun updateProduct(productDb: ProductDb)
+
     @Query("SELECT * from products WHERE product_name=:productName LIMIT 1")
     fun getProductByName(productName: String): ProductDb?
 
@@ -16,7 +19,7 @@ interface ProductDao {
     fun getProductById(productId: Int): ProductDb?
 
     @Delete
-    fun removeProduct(productDb: ProductDb)
+    fun deleteProduct(productDb: ProductDb)
 
     @Query("SELECT * FROM products")
     fun selectAll(): PagingSource<Int, ProductDb>
