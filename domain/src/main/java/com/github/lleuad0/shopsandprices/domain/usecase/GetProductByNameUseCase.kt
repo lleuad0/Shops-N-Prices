@@ -4,11 +4,11 @@ import com.github.lleuad0.shopsandprices.domain.LocalRepository
 import com.github.lleuad0.shopsandprices.domain.model.Product
 import javax.inject.Inject
 
-class GetProductByIdUseCase @Inject constructor(private val localRepository: LocalRepository) :
+class GetProductByNameUseCase @Inject constructor(private val localRepository: LocalRepository) :
     UseCase<Product?>() {
-    var productId: Int = 0
+    lateinit var productName: String
 
     override suspend fun execute(): Product? {
-        return localRepository.getProductById(productId)
+        return localRepository.getProductByName(productName)
     }
 }

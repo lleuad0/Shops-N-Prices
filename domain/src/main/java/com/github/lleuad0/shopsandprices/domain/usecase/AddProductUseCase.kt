@@ -12,17 +12,17 @@ class AddProductUseCase @Inject constructor(private val localRepository: LocalRe
     lateinit var productShops: ArrayList<String>
 
     override suspend fun execute() {
-        val savedProduct = localRepository.getProductByName(productName)
-
-        val product = savedProduct
+        val product = localRepository.getProductByName(productName)
             ?: localRepository.addProduct(Product(productName))
                 .run { localRepository.getProductByName(productName) }
 
         productShops.map {
-            localRepository.addShop(Shop(it))
-                .run { localRepository.getShopByName(it) }
+            localRepository.getShopByName(it)
+                ?: localRepository.addShop(Shop(it)).run { localRepository.getShopByName(it) }
         }.forEach {
-            product?.let { product -> localRepository.addPrice(product, it, productPrice) }
+            if (product != null && it != null) {
+                localRepository.addPrice(product, it, productPrice)
+            }
         }
     }
 }

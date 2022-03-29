@@ -26,7 +26,7 @@ class ListFragment : Fragment() {
     private var binding: FragmentListBinding? = null
     private val viewModel: ListViewModel by viewModels()
     private val adapter = ProductListAdapter({
-        findNavController().navigate(ListFragmentDirections.showInfoFromList(it.id))
+        findNavController().navigate(ListFragmentDirections.showInfoFromList(it.name))
     }) { deleteProduct(it) }
 
     override fun onCreateView(

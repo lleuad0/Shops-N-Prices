@@ -30,10 +30,6 @@ class LocalRepositoryImpl @Inject constructor(
         return productDao.insertProduct(product.toDb())
     }
 
-    override suspend fun getProductById(productId: Int): Product? {
-        return productDao.getProductById(productId)?.toUi()
-    }
-
     override suspend fun getProductByName(productName: String): Product? {
         return productDao.getProductByName(productName)?.toUi()
     }
@@ -46,15 +42,15 @@ class LocalRepositoryImpl @Inject constructor(
         return shopDao.insertShop(shop.toDb())
     }
 
-    override suspend fun getShopByName(shopName: String): Shop {
-        return shopDao.getShopByName(shopName).toUi()
+    override suspend fun getShopByName(shopName: String): Shop? {
+        return shopDao.getShopByName(shopName)?.toUi()
     }
 
     override suspend fun addPrice(product: Product, shop: Shop, price: Double) {
-        return priceDao.insertPrice(PriceDb(product.id, shop.id, price))
+        return priceDao.insertPrice(PriceDb(product.name, shop.name, price))
     }
 
-    override suspend fun getShopsAndPricesByProductId(productId: Int): List<Price> {
-        return priceDao.selectPrices(productId).map { it.toUi() }
+    override suspend fun getShopsAndPricesByProductName(productName: String): List<Price> {
+        return priceDao.selectPrices(productName).map { it.toUi() }
     }
 }

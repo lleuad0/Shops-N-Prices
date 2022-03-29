@@ -6,7 +6,7 @@ import androidx.room.Relation
 data class ShopAndPrice(
     @Embedded val shop: ShopDb,
     @Relation(
-        parentColumn = "shop_id",
-        entityColumn = "id_shop"
+        parentColumn = "shop_name",
+        entityColumn = "name_shop"
     ) val price: PriceDb
 )

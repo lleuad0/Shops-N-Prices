@@ -13,7 +13,7 @@ interface ShopDao {
     fun removeShop(shopDb: ShopDb)
 
     @Query("SELECT * from shops WHERE shop_name=:shopName LIMIT 1")
-    fun getShopByName(shopName: String): ShopDb
+    fun getShopByName(shopName: String): ShopDb?
 
     @Query("SELECT * FROM shops")
     fun selectAll(): PagingSource<Int, ShopDb>

@@ -6,23 +6,23 @@ import androidx.room.ForeignKey
 import androidx.room.ForeignKey.Companion.CASCADE
 
 @Entity(
-    primaryKeys = ["id_product", "id_shop"],
+    primaryKeys = ["name_product", "name_shop"],
     tableName = "prices",
     foreignKeys = [ForeignKey(
         entity = ProductDb::class,
-        parentColumns = ["product_id"],
-        childColumns = ["id_product"],
+        parentColumns = ["product_name"],
+        childColumns = ["name_product"],
         onDelete = CASCADE
     ),
         ForeignKey(
             entity = ShopDb::class,
-            parentColumns = ["shop_id"],
-            childColumns = ["id_shop"],
+            parentColumns = ["shop_name"],
+            childColumns = ["name_shop"],
             onDelete = CASCADE
         )]
 )
 data class PriceDb(
-    @ColumnInfo(name = "id_product") val productId: Int,
-    @ColumnInfo(name = "id_shop", index = true) val shopId: Int,
+    @ColumnInfo(name = "name_product") val productName: String,
+    @ColumnInfo(name = "name_shop", index = true) val shopName: String,
     @ColumnInfo(name = "price") val price: Double,
 )
