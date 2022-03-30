@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class GetProductByIdUseCase @Inject constructor(private val localRepository: LocalRepository) :
     UseCase<Product?>() {
-    var productId: Int = 0
+    var productId: Long = 0
 
     override suspend fun execute(): Product? {
         return localRepository.getProductById(productId)

@@ -16,7 +16,7 @@ interface ProductDao {
     fun getProductByName(productName: String): ProductDb?
 
     @Query("SELECT * from products WHERE product_id = :productId LIMIT 1")
-    fun getProductById(productId: Int): ProductDb?
+    fun getProductById(productId: Long): ProductDb?
 
     @Delete
     fun deleteProduct(productDb: ProductDb)

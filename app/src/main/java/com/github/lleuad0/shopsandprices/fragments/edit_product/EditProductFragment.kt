@@ -13,9 +13,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.lleuad0.shopsandprices.PriceEditAdapter
 import com.github.lleuad0.shopsandprices.R
+import com.github.lleuad0.shopsandprices.adapters.AddPriceAdapter
+import com.github.lleuad0.shopsandprices.adapters.PriceEditAdapter
 import com.github.lleuad0.shopsandprices.databinding.FragmentProductEditBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -26,7 +28,7 @@ class EditProductFragment : Fragment() {
     private var binding: FragmentProductEditBinding? = null
     private val viewModel: EditProductViewModel by viewModels()
     private val args by navArgs<EditProductFragmentArgs>()
-    private val adapter = PriceEditAdapter()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,15 +41,20 @@ class EditProductFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val priceEditAdapter = PriceEditAdapter()
+        val addPriceAdapter = AddPriceAdapter { priceEditAdapter.addNewPrice() }
+        val concatAdapter = ConcatAdapter(priceEditAdapter, addPriceAdapter)
+
         binding?.recyclerView?.let {
             it.layoutManager = LinearLayoutManager(requireContext())
-            it.adapter = adapter
+            it.adapter = concatAdapter
         }
         binding?.saveButton?.setOnClickListener {
             viewModel.saveProductData(
                 binding?.productTitle?.text?.toString(),
                 binding?.productInfo?.text?.toString(),
-                adapter.exportChangedData()
+                priceEditAdapter.exportChangedData()
             )
         }
 
@@ -57,7 +64,7 @@ class EditProductFragment : Fragment() {
                     binding?.productTitle?.text = SpannableStringBuilder(it.product?.name ?: "")
                     binding?.productInfo?.text =
                         SpannableStringBuilder(it.product?.additionalInfo ?: "")
-                    adapter.setData(it.shopsAndPrices)
+                    priceEditAdapter.setData(it.shopsAndPrices)
 
                     if (it.isSaved) {
                         Toast.makeText(

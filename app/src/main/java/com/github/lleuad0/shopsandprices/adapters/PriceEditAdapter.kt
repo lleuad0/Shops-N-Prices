@@ -1,4 +1,4 @@
-package com.github.lleuad0.shopsandprices
+package com.github.lleuad0.shopsandprices.adapters
 
 import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
@@ -13,6 +13,7 @@ import com.github.lleuad0.shopsandprices.domain.model.Shop
 class PriceEditAdapter : RecyclerView.Adapter<PriceEditAdapter.ViewHolder>() {
     private val data: MutableList<Price> = mutableListOf()
     private var changedData: MutableList<Price> = mutableListOf()
+    private var addedItemId: Long = 0
 
     class ViewHolder(val binding: ItemPriceEditBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -87,4 +88,9 @@ class PriceEditAdapter : RecyclerView.Adapter<PriceEditAdapter.ViewHolder>() {
     }
 
     fun exportChangedData(): List<Price> = changedData.toList()
+
+    fun addNewPrice() {
+        data.add(Price(0.0, Shop("", "", --addedItemId)))
+        notifyItemInserted(data.lastIndex)
+    }
 }

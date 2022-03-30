@@ -13,8 +13,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.lleuad0.shopsandprices.ProductListAdapter
 import com.github.lleuad0.shopsandprices.R
+import com.github.lleuad0.shopsandprices.adapters.ProductListAdapter
 import com.github.lleuad0.shopsandprices.databinding.FragmentListBinding
 import com.github.lleuad0.shopsandprices.domain.model.Product
 import dagger.hilt.android.AndroidEntryPoint

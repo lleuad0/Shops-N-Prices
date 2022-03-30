@@ -22,7 +22,7 @@ import androidx.room.ForeignKey.Companion.CASCADE
         )]
 )
 data class PriceDb(
-    @ColumnInfo(name = "id_product") val productId: Int,
-    @ColumnInfo(name = "id_shop", index = true) val shopId: Int,
+    @ColumnInfo(name = "id_product") val productId: Long,
+    @ColumnInfo(name = "id_shop", index = true) val shopId: Long,
     @ColumnInfo(name = "price") val price: Double,
 )

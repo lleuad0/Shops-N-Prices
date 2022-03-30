@@ -1,4 +1,4 @@
-package com.github.lleuad0.shopsandprices
+package com.github.lleuad0.shopsandprices.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

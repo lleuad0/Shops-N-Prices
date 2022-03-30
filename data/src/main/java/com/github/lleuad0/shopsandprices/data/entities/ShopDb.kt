@@ -9,5 +9,5 @@ data class ShopDb(
     @ColumnInfo(name = "shop_name") val shopName: String,
     @ColumnInfo(name = "shop_info") val shopInfo: String,
 
-    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "shop_id") val shopId: Int = 0,
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "shop_id") val shopId: Long = 0,
 )

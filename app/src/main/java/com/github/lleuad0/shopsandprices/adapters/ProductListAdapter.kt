@@ -1,4 +1,4 @@
-package com.github.lleuad0.shopsandprices
+package com.github.lleuad0.shopsandprices.adapters
 
 
 import android.content.Context
@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.github.lleuad0.shopsandprices.R
 import com.github.lleuad0.shopsandprices.databinding.ItemListBinding
 import com.github.lleuad0.shopsandprices.domain.model.Product
 

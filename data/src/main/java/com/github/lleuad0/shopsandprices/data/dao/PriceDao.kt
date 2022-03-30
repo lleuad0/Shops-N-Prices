@@ -26,5 +26,5 @@ interface PriceDao {
                 "ON shops.shop_id = prices.id_shop " +
                 "WHERE id_product = :productId"
     )
-    fun selectPrices(productId: Int): List<ShopAndPrice>
+    fun selectPrices(productId: Long): List<ShopAndPrice>
 }

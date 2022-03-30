@@ -29,7 +29,7 @@
         tools:layout="@layout/fragment_product_info">
         <argument
             android:name="productId"
-            app:argType="integer" />
+            app:argType="long" />
         <action
             android:id="@+id/editProduct"
             app:destination="@id/editProductFragment" />
@@ -41,6 +41,6 @@
         tools:layout="@layout/fragment_product_edit">
         <argument
             android:name="productId"
-            app:argType="integer" />
+            app:argType="long" />
     </fragment>
 </navigation>

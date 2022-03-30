@@ -20,7 +20,6 @@ class AddProductUseCase @Inject constructor(private val localRepository: LocalRe
 
         productShops.map {
             localRepository.addShop(Shop(it))
-                .run { localRepository.getShopByName(it) }
         }.forEach {
             product?.let { product -> localRepository.addPrice(product, it, productPrice) }
         }

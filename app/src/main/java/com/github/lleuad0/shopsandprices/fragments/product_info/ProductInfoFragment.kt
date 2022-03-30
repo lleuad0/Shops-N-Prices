@@ -12,7 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.lleuad0.shopsandprices.PriceAdapter
+import com.github.lleuad0.shopsandprices.adapters.PriceAdapter
 import com.github.lleuad0.shopsandprices.databinding.FragmentProductInfoBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest

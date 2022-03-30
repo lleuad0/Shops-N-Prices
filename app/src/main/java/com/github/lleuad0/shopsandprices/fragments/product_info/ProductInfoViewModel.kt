@@ -22,7 +22,7 @@ class ProductInfoViewModel @Inject constructor(
 
     val stateFlow = MutableStateFlow(InfoUiState())
 
-    fun getProduct(productId: Int) {
+    fun getProduct(productId: Long) {
         getProductByIdUseCase.apply {
             this.productId = productId
         }.runOnBackground {
@@ -30,7 +30,7 @@ class ProductInfoViewModel @Inject constructor(
         }
     }
 
-    fun getDataForProduct(productId: Int) {
+    fun getDataForProduct(productId: Long) {
         getShopsAndPricesByProductIdUseCase.apply {
             this.productId = productId
         }.runOnBackground { stateFlow.update { state -> state.copy(shopsAndPrices = it) } }
