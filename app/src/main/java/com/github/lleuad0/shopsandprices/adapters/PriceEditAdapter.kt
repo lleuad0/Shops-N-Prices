@@ -59,6 +59,11 @@ class PriceEditAdapter : RecyclerView.Adapter<PriceEditAdapter.ViewHolder>() {
                 changedData.add(newPrice)
             }
         }
+        holder.binding.deleteButton.setOnClickListener {
+            changedData.add(Price(-1.0, data[position].shop))
+            data.removeAt(position)
+            notifyItemRemoved(position)
+        }
     }
 
     override fun getItemCount(): Int {

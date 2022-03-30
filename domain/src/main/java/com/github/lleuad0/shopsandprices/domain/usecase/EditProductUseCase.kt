@@ -17,12 +17,16 @@ class EditProductUseCase @Inject constructor(private val localRepository: LocalR
         val product = Product(productName!!, productInfo!!, productId!!)
         localRepository.updateProduct(product)
         prices.forEach {
-            if (it.shop.id < 0) {
-                val shop = localRepository.addShop(Shop(it.shop.name, it.shop.additionalInfo))
-                localRepository.addPrice(product, shop, it.price)
+            if (it.price == -1.0) {
+                localRepository.removePrice(product, it.shop)
             } else {
-                localRepository.updateShop(it.shop)
-                localRepository.updatePrice(product, it.shop, it.price)
+                if (it.shop.id < 0) {
+                    val shop = localRepository.addShop(Shop(it.shop.name, it.shop.additionalInfo))
+                    localRepository.addPrice(product, shop, it.price)
+                } else {
+                    localRepository.updateShop(it.shop)
+                    localRepository.updatePrice(product, it.shop, it.price)
+                }
             }
         }
     }

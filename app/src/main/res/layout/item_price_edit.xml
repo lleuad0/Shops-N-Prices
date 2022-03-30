@@ -8,18 +8,27 @@
 
     <EditText
         android:id="@+id/shopName"
-        android:layout_width="200dp"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:autofillHints=""
+        android:layout_weight="1"
         android:gravity="center"
         android:inputType="text" />
 
     <EditText
         android:id="@+id/price"
-        android:layout_width="200dp"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:autofillHints=""
         android:gravity="center"
+        android:layout_weight="1"
         android:inputType="text" />
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/del_alert_title" />
 
 </LinearLayout>

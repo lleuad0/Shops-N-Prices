@@ -17,8 +17,10 @@ interface LocalRepository {
     suspend fun addShop(shop: Shop): Shop
     suspend fun updateShop(shop: Shop)
     suspend fun getShopById(shopId: Long): Shop
+    suspend fun removeShop(shop: Shop)
 
     suspend fun addPrice(product: Product, shop: Shop, price: Double)
     suspend fun updatePrice(product: Product, shop: Shop, price: Double)
     suspend fun getShopsAndPricesByProductId(productId: Long): List<Price>
+    suspend fun removePrice(product: Product, shop: Shop)
 }
