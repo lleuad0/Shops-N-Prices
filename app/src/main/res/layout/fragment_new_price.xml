@@ -8,46 +8,35 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/productNameTitle"
+        android:id="@+id/productTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/product_name_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/productNameInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autofillHints=""
-        android:hint="@string/product_name_hint"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productNameTitle"
-        android:inputType="text" />
-
     <TextView
-        android:id="@+id/productInfoTitle"
+        android:id="@+id/shopTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/product_info_title"
+        android:text="@string/product_shop_title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productNameInput" />
+        app:layout_constraintTop_toBottomOf="@id/productTitle" />
 
     <EditText
-        android:id="@+id/productInfoInput"
+        android:id="@+id/priceText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autofillHints=""
-        android:hint="@string/product_info_hint"
+        android:inputType="numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productInfoTitle"
-        android:inputType="text" />
+        app:layout_constraintTop_toBottomOf="@id/shopTitle" />
 
     <Button
-        android:id="@+id/nextButton"
+        android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/next"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productInfoInput" />
+        android:text="@string/save_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

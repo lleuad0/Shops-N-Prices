@@ -17,10 +17,13 @@
     <string name="edit_activity_title">Edit Product</string>
     <string name="product_name_title">Product Name</string>
     <string name="product_name_hint">Enter Name</string>
+    <string name="product_info_title">Product Info</string>
+    <string name="product_info_hint">Enter Info</string>
     <string name="product_shop_title">Product Shop</string>
     <string name="product_shop_hint">Enter Shop</string>
     <string name="product_price_title">Product Price</string>
     <string name="product_price_hint">0.00</string>
     <string name="save_button">Save</string>
+    <string name="next">Next</string>
 
 </resources>

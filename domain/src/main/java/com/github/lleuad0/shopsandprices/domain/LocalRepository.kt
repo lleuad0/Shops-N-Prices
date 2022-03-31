@@ -8,12 +8,12 @@ import kotlinx.coroutines.flow.Flow
 
 interface LocalRepository {
     suspend fun getAllProducts(): Flow<PagingData<Product>>
-    suspend fun addProduct(product: Product)
+    suspend fun addProduct(product: Product): Product
     suspend fun updateProduct(product: Product)
-    suspend fun getProductById(productId: Long): Product?
-    suspend fun getProductByName(productName: String): Product?
+    suspend fun getProductById(productId: Long): Product
     suspend fun removeProduct(product: Product)
 
+    suspend fun getAllShops(): Flow<PagingData<Shop>>
     suspend fun addShop(shop: Shop): Shop
     suspend fun updateShop(shop: Shop)
     suspend fun getShopById(shopId: Long): Shop

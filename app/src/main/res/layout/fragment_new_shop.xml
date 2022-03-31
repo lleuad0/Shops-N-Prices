@@ -8,46 +8,37 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/productNameTitle"
+        android:id="@+id/productShopTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/product_name_title"
+        android:text="@string/product_shop_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/productNameInput"
+        android:id="@+id/productShopInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:autofillHints=""
-        android:hint="@string/product_name_hint"
+        android:hint="@string/product_shop_hint"
+        android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productNameTitle"
-        android:inputType="text" />
+        app:layout_constraintTop_toBottomOf="@+id/productShopTitle" />
 
-    <TextView
-        android:id="@+id/productInfoTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/product_info_title"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/shopsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/nextButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productNameInput" />
-
-    <EditText
-        android:id="@+id/productInfoInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autofillHints=""
-        android:hint="@string/product_info_hint"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productInfoTitle"
-        android:inputType="text" />
+        app:layout_constraintTop_toBottomOf="@+id/productShopInput" />
 
     <Button
         android:id="@+id/nextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/next"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productInfoInput" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

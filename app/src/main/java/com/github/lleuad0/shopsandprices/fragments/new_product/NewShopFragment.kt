@@ -11,22 +11,22 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.github.lleuad0.shopsandprices.R
-import com.github.lleuad0.shopsandprices.databinding.FragmentNewProductBinding
+import com.github.lleuad0.shopsandprices.databinding.FragmentNewShopBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class NewProductFragment : Fragment() {
-    var binding: FragmentNewProductBinding? = null
-    private val navViewModel by navGraphViewModels<NewProductNavViewModel>(R.id.newProductNavigation)
+class NewShopFragment : Fragment() {
+    var binding: FragmentNewShopBinding? = null
+    private val navViewModel: NewProductNavViewModel by navGraphViewModels(R.id.newProductNavigation)
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentNewProductBinding.inflate(inflater)
+        binding = FragmentNewShopBinding.inflate(inflater)
         return binding?.root
     }
 
@@ -34,18 +34,15 @@ class NewProductFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.nextButton?.setOnClickListener {
-            navViewModel.addProduct(
-                binding?.productNameInput?.text.toString(),
-                binding?.productInfoInput?.text.toString(),
-            )
+            navViewModel.addShop(binding?.productShopInput?.text.toString(), "")
         }
 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 navViewModel.stateFlow.collectLatest {
-                    if (it.isProductAdded) {
-                        findNavController().navigate(NewProductFragmentDirections.addShop())
-                        navViewModel.onRedirectedProduct()
+                    if (it.isShopAdded) {
+                        findNavController().navigate(NewShopFragmentDirections.addPrice())
+                        navViewModel.onRedirectedShop()
                     }
                 }
             }

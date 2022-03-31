@@ -26,24 +26,25 @@ class LocalRepositoryImpl @Inject constructor(
             .flow.map { data -> data.map { it.toUi() } }
     }
 
-    override suspend fun addProduct(product: Product) {
-        return productDao.insertProduct(product.toDb())
+    override suspend fun addProduct(product: Product): Product {
+        return productDao.getProductById(productDao.insertProduct(product.toDb())).toUi()
     }
 
     override suspend fun updateProduct(product: Product) {
         return productDao.updateProduct(product.toDb())
     }
 
-    override suspend fun getProductById(productId: Long): Product? {
-        return productDao.getProductById(productId)?.toUi()
-    }
-
-    override suspend fun getProductByName(productName: String): Product? {
-        return productDao.getProductByName(productName)?.toUi()
+    override suspend fun getProductById(productId: Long): Product {
+        return productDao.getProductById(productId).toUi()
     }
 
     override suspend fun removeProduct(product: Product) {
         return productDao.deleteProduct(product.toDb())
+    }
+
+    override suspend fun getAllShops(): Flow<PagingData<Shop>> {
+        return Pager(PagingConfig(10)) { shopDao.selectAll() }
+            .flow.map { data -> data.map { it.toUi() } }
     }
 
     override suspend fun addShop(shop: Shop): Shop {

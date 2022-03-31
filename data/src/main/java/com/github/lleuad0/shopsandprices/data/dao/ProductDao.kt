@@ -7,16 +7,13 @@ import com.github.lleuad0.shopsandprices.data.entities.ProductDb
 @Dao
 interface ProductDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertProduct(productDb: ProductDb)
+    fun insertProduct(productDb: ProductDb): Long
 
     @Update
     fun updateProduct(productDb: ProductDb)
 
-    @Query("SELECT * from products WHERE product_name=:productName LIMIT 1")
-    fun getProductByName(productName: String): ProductDb?
-
     @Query("SELECT * from products WHERE product_id = :productId LIMIT 1")
-    fun getProductById(productId: Long): ProductDb?
+    fun getProductById(productId: Long): ProductDb
 
     @Delete
     fun deleteProduct(productDb: ProductDb)

@@ -12,16 +12,11 @@
         tools:layout="@layout/fragment_list">
         <action
             android:id="@+id/addNewFromList"
-            app:destination="@id/newProductFragment" />
+            app:destination="@id/newProductNavigation" />
         <action
             android:id="@+id/showInfoFromList"
             app:destination="@id/productInfoFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/newProductFragment"
-        android:name="com.github.lleuad0.shopsandprices.fragments.new_product.NewProductFragment"
-        android:label="NewProductFragment"
-        tools:layout="@layout/fragment_new_product" />
     <fragment
         android:id="@+id/productInfoFragment"
         android:name="com.github.lleuad0.shopsandprices.fragments.product_info.ProductInfoFragment"
@@ -43,4 +38,36 @@
             android:name="productId"
             app:argType="long" />
     </fragment>
+
+    <navigation
+        android:id="@+id/newProductNavigation"
+        app:startDestination="@id/newProductFragment">
+        <fragment
+            android:id="@+id/newProductFragment"
+            android:name="com.github.lleuad0.shopsandprices.fragments.new_product.NewProductFragment"
+            android:label="NewProductFragment"
+            tools:layout="@layout/fragment_new_product">
+            <action
+                android:id="@+id/addShop"
+                app:destination="@id/newShopFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/newShopFragment"
+            android:name="com.github.lleuad0.shopsandprices.fragments.new_product.NewShopFragment"
+            android:label="NewShopFragment"
+            tools:layout="@layout/fragment_new_shop">
+            <action
+                android:id="@+id/addPrice"
+                app:destination="@id/newPriceFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/newPriceFragment"
+            android:name="com.github.lleuad0.shopsandprices.fragments.new_product.NewPriceFragment"
+            android:label="NewPriceFragment"
+            tools:layout="@layout/fragment_new_price">
+            <action
+                android:id="@+id/finishAdding"
+                app:destination="@+id/listFragment" />
+        </fragment>
+    </navigation>
 </navigation>

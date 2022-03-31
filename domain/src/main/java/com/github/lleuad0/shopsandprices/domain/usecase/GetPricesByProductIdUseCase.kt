@@ -4,7 +4,7 @@ import com.github.lleuad0.shopsandprices.domain.LocalRepository
 import com.github.lleuad0.shopsandprices.domain.model.Price
 import javax.inject.Inject
 
-class GetShopsAndPricesByProductIdUseCase @Inject constructor(private val localRepository: LocalRepository) :
+class GetPricesByProductIdUseCase @Inject constructor(private val localRepository: LocalRepository) :
     UseCase<List<Price>>() {
     var productId: Long = 0
 
