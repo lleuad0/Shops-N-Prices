@@ -2,10 +2,18 @@
 
 buildscript {
     ext {
-        kotlin_version = '1.6.10'
-        hilt_version = '2.41'
+        /** Sdk and tools */
+        compile_sdk = 33
+        application_id = "com.github.lleuad0.shopsandprices"
+        min_sdk = 23
+        target_sdk = 33
+        version_code = 1
+        version_name = "1.0"
+
+        kotlin_version = '1.8.10'
+        hilt_version = '2.45'
         paging_version = '3.1.1'
-        coroutines_version = '1.6.0'
+        coroutines_version = '1.6.4'
         nav_version = '2.4.1'
         timber_version = '5.0.1'
     }
@@ -14,10 +22,10 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.1.2'
-        classpath("com.google.dagger:hilt-android-gradle-plugin:2.41")
+        classpath 'com.android.tools.build:gradle:7.4.2'
+        classpath "com.google.dagger:hilt-android-gradle-plugin:2.45"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version")
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
