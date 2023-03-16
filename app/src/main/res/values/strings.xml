@@ -2,6 +2,7 @@
     <string name="app_name" translatable="false">Shops\'N\'Prices</string>
 
     <string name="no_items">No items added</string>
+    <string name="add">Add</string>
     <string name="added_success">Product added</string>
     <string name="deleted_success">Product deleted</string>
     <string name="del_alert_title">Delete</string>

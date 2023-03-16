@@ -1,4 +1,4 @@
-package com.github.lleuad0.shopsandprices.fragments.list
+package com.github.lleuad0.shopsandprices.ui.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -1,4 +1,4 @@
-package com.github.lleuad0.shopsandprices.fragments.new_product
+package com.github.lleuad0.shopsandprices.ui.new_product
 
 import androidx.lifecycle.ViewModel
 import com.github.lleuad0.shopsandprices.domain.model.Product

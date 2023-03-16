@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="no_items">Список пуст</string>
+    <string name="add">Добавить</string>
     <string name="added_success">Продукт добавлен</string>
     <string name="deleted_success">Продукт удалён</string>
     <string name="del_alert_title">Удалить</string>
