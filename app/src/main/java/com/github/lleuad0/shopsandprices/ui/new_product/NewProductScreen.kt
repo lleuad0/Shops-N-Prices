@@ -29,7 +29,7 @@ fun NewProductScreen(parentViewModel: NewProductNavViewModel, navigateNext: () -
                 .padding(padding)
                 .padding(8.dp)
         ) {
-            Text(text = stringResource(id = R.string.product_name_title))
+            Text(text = stringResource(id = R.string.product_name))
             TextField(value = name, onValueChange = { name = it }, label = {
                 Text(
                     text = stringResource(

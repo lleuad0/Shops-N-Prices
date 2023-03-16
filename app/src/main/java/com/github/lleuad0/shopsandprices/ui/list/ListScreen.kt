@@ -3,9 +3,7 @@ package com.github.lleuad0.shopsandprices.ui.list
 import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -14,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
@@ -38,6 +37,8 @@ fun ListScreen(
     val abstractState = viewModel.abstractStateFlow.collectAsState()
     val scope = rememberCoroutineScope()
     val items = state.value.products.collectAsLazyPagingItems()
+    val snackState = remember { SnackbarHostState() }
+    val errorMessage = stringResource(id = R.string.error)
 
     Scaffold(floatingActionButton = {
         FloatingActionButton(onClick = navigateToAdding) {
@@ -48,14 +49,17 @@ fun ListScreen(
                 )
             )
         }
-    }) { padding ->
+    }, snackbarHost = { SnackbarHost(hostState = snackState) }) { padding ->
         Box(
             Modifier
                 .fillMaxSize()
                 .padding(padding)
                 .padding(8.dp)
         ) {
-            LazyColumn(Modifier.fillMaxSize()) {
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
                 items(items = items, key = { it.id }) {
                     it?.let {
                         ProductView(
@@ -76,7 +80,7 @@ fun ListScreen(
 
     LaunchedEffect(abstractState.value.throwable) {
         abstractState.value.throwable?.let {
-            // TODO: show an error
+            snackState.showSnackbar(it.localizedMessage ?: errorMessage)
             scope.launch { viewModel.onErrorThrown() }
         }
     }
@@ -87,7 +91,8 @@ fun ListScreen(
                 context.resources.getString(R.string.deleted_success),
                 Toast.LENGTH_SHORT
             ).show()
-            viewModel.onDeleted()
+            items.refresh()
+            scope.launch { viewModel.onDeleted() }
         }
     }
     LaunchedEffect(null) {
@@ -104,11 +109,15 @@ fun ProductView(
     onLongClick: (Product) -> Unit,
 ) {
     Card(
-        modifier.combinedClickable(
-            onClick = { onClick(item) },
-            onLongClick = { onLongClick(item) })
+        modifier
+            .fillMaxWidth()
+            .combinedClickable(
+                onClick = { onClick(item) },
+                onLongClick = { onLongClick(item) })
     ) {
-        Text(text = stringResource(id = R.string.product_name_title))
-        Text(text = item.name)
+        Column(Modifier.padding(16.dp)) {
+            Text(text = stringResource(id = R.string.product_name), fontStyle = FontStyle.Italic)
+            Text(text = item.name)
+        }
     }
 }

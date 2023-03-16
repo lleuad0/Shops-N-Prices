@@ -39,7 +39,6 @@ class ListViewModel @Inject constructor(
         removeProductUseCase.apply {
             this.product = product
         }.runOnBackground {
-            getAllData()
             stateFlow.update { state -> state.copy(isProductDeleted = true) }
         }
     }
