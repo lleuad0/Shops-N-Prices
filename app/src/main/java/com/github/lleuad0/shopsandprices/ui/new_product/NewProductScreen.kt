@@ -37,7 +37,7 @@ fun NewProductScreen(parentViewModel: NewProductNavViewModel, navigateNext: () -
                     )
                 )
             })
-            Text(text = stringResource(id = R.string.product_info_title))
+            Text(text = stringResource(id = R.string.product_info))
             TextField(value = info, onValueChange = { info = it }, label = {
                 Text(
                     text = stringResource(

@@ -15,10 +15,10 @@
     <string name="info_table_shops_title">Available at</string>
     <string name="info_table_prices_title">At the price of</string>
 
-    <string name="edit_activity_title">Edit Product</string>
+    <string name="edit_product">Edit Product</string>
     <string name="product_name">Product Name</string>
     <string name="product_name_hint">Enter Name</string>
-    <string name="product_info_title">Product Info</string>
+    <string name="product_info">Product Info</string>
     <string name="product_info_hint">Enter Info</string>
     <string name="product_shop_title">Product Shop</string>
     <string name="product_shop_hint">Enter Shop</string>

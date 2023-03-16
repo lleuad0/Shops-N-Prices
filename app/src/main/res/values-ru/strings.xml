@@ -14,10 +14,10 @@
     <string name="info_table_shops_title">Доступно в</string>
     <string name="info_table_prices_title">По цене</string>
 
-    <string name="edit_activity_title">Изменить продукт</string>
+    <string name="edit_product">Изменить продукт</string>
     <string name="product_name">Продукт</string>
     <string name="product_name_hint">Введите название</string>
-    <string name="product_info_title">Дополнительная информация</string>
+    <string name="product_info">Дополнительная информация</string>
     <string name="product_info_hint">Введите дополнительную информацию</string>
     <string name="product_shop_title">Магазин</string>
     <string name="product_shop_hint">Введите магазин</string>
