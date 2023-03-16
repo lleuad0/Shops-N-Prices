@@ -17,6 +17,8 @@ buildscript {
         coroutines_version = '1.6.4'
         timber_version = '5.0.1'
         compose_version = '1.2.0'
+        junit_version = '4.13.2'
+        robolectric_version = '4.9.2'
     }
     repositories {
         google()
