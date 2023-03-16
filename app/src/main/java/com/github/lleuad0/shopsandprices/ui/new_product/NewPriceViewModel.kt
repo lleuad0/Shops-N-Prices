@@ -1,6 +1,6 @@
 package com.github.lleuad0.shopsandprices.ui.new_product
 
-import androidx.lifecycle.ViewModel
+import com.github.lleuad0.shopsandprices.AbstractViewModel
 import com.github.lleuad0.shopsandprices.domain.model.Product
 import com.github.lleuad0.shopsandprices.domain.model.Shop
 import com.github.lleuad0.shopsandprices.domain.usecase.AddPriceUseCase
@@ -8,10 +8,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 @HiltViewModel
-class NewPriceViewModel @Inject constructor(private val addPriceUseCase: AddPriceUseCase) :
-    ViewModel() {
+class NewPriceViewModel @Inject constructor(
+    private val addPriceUseCase: AddPriceUseCase,
+    backgroundContext: CoroutineContext,
+) :
+    AbstractViewModel(backgroundContext) {
     data class NewPriceState(
         val isPriceAdded: Boolean = false,
     )
@@ -25,10 +29,5 @@ class NewPriceViewModel @Inject constructor(private val addPriceUseCase: AddPric
         }.runOnBackground {
             stateFlow.update { state -> state.copy(isPriceAdded = true) }
         }
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        addPriceUseCase.cancelJob()
     }
 }

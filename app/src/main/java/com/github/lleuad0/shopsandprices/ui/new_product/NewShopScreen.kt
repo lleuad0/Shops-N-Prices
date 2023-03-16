@@ -18,6 +18,7 @@ object NewShopDestination : Destination {
 @Composable
 fun NewShopScreen(parentViewModel: NewProductNavViewModel, navigateNext: () -> Unit) {
     val state = parentViewModel.stateFlow.collectAsState()
+    val abstractState = parentViewModel.abstractStateFlow.collectAsState()
     val scope = rememberCoroutineScope()
     var shopName by remember { mutableStateOf("") }
 
@@ -37,6 +38,13 @@ fun NewShopScreen(parentViewModel: NewProductNavViewModel, navigateNext: () -> U
         }
     }
 
+
+    LaunchedEffect(abstractState.value.throwable) {
+        abstractState.value.throwable?.let {
+            // TODO: show an error
+            scope.launch { parentViewModel.onErrorThrown() }
+        }
+    }
     LaunchedEffect(state.value.isShopAdded) {
         if (state.value.isShopAdded) {
             navigateNext()

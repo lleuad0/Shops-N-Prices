@@ -1,6 +1,6 @@
 package com.github.lleuad0.shopsandprices.ui.edit_product
 
-import androidx.lifecycle.ViewModel
+import com.github.lleuad0.shopsandprices.AbstractViewModel
 import com.github.lleuad0.shopsandprices.domain.model.Price
 import com.github.lleuad0.shopsandprices.domain.model.Product
 import com.github.lleuad0.shopsandprices.domain.model.Shop
@@ -11,20 +11,22 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 @HiltViewModel
 class EditProductViewModel @Inject constructor(
     private val getProductByIdUseCase: GetProductByIdUseCase,
     private val getPricesByProductIdUseCase: GetPricesByProductIdUseCase,
     private val editProductUseCase: EditProductUseCase,
-) : ViewModel() {
-    data class InfoUiState(
+    backgroundContext: CoroutineContext,
+) : AbstractViewModel(backgroundContext) {
+    data class EditUiState(
         val product: Product? = null,
         val shopsAndPrices: List<Price> = listOf(),
         val isSaved: Boolean = false,
     )
 
-    val stateFlow = MutableStateFlow(InfoUiState())
+    val stateFlow = MutableStateFlow(EditUiState())
 
     fun getProduct(productId: Long) {
         getProductByIdUseCase.apply {
@@ -83,12 +85,5 @@ class EditProductViewModel @Inject constructor(
         }.runOnBackground {
             stateFlow.update { state -> state.copy(isSaved = true) }
         }
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        getProductByIdUseCase.cancelJob()
-        getPricesByProductIdUseCase.cancelJob()
-        editProductUseCase.cancelJob()
     }
 }

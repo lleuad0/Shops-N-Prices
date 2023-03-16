@@ -1,6 +1,6 @@
 package com.github.lleuad0.shopsandprices.ui.product_info
 
-import androidx.lifecycle.ViewModel
+import com.github.lleuad0.shopsandprices.AbstractViewModel
 import com.github.lleuad0.shopsandprices.domain.model.Price
 import com.github.lleuad0.shopsandprices.domain.model.Product
 import com.github.lleuad0.shopsandprices.domain.usecase.GetPricesByProductIdUseCase
@@ -9,12 +9,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 @HiltViewModel
 class ProductInfoViewModel @Inject constructor(
     private val getProductByIdUseCase: GetProductByIdUseCase,
     private val getPricesByProductIdUseCase: GetPricesByProductIdUseCase,
-) : ViewModel() {
+    backgroundContext: CoroutineContext,
+) : AbstractViewModel(backgroundContext) {
     data class InfoUiState(
         val product: Product? = null,
         val shopsAndPrices: List<Price> = listOf(),
@@ -34,11 +36,5 @@ class ProductInfoViewModel @Inject constructor(
         getPricesByProductIdUseCase.apply {
             this.productId = productId
         }.runOnBackground { stateFlow.update { state -> state.copy(shopsAndPrices = it) } }
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        getProductByIdUseCase.cancelJob()
-        getPricesByProductIdUseCase.cancelJob()
     }
 }

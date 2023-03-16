@@ -27,6 +27,7 @@ object EditProductDestination : Destination {
 @Composable
 fun EditProductScreen(viewModel: EditProductViewModel, productId: Long, navigate: () -> Unit) {
     val state = viewModel.stateFlow.collectAsState()
+    val abstractState = viewModel.abstractStateFlow.collectAsState()
     val scope = rememberCoroutineScope()
 
     var name by remember { mutableStateOf("") }
@@ -87,6 +88,12 @@ fun EditProductScreen(viewModel: EditProductViewModel, productId: Long, navigate
         }
     }
 
+    LaunchedEffect(abstractState.value.throwable) {
+        abstractState.value.throwable?.let {
+            // TODO: show an error
+            scope.launch { viewModel.onErrorThrown() }
+        }
+    }
     LaunchedEffect(productId) {
         with(viewModel) {
             getProduct(productId)

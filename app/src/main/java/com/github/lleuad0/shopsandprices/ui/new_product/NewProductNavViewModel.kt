@@ -1,16 +1,17 @@
 package com.github.lleuad0.shopsandprices.ui.new_product
 
-import androidx.lifecycle.ViewModel
+import com.github.lleuad0.shopsandprices.AbstractViewModel
 import com.github.lleuad0.shopsandprices.domain.model.Product
 import com.github.lleuad0.shopsandprices.domain.model.Shop
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 @HiltViewModel
-class NewProductNavViewModel @Inject constructor() :
-    ViewModel() {
+class NewProductNavViewModel @Inject constructor(backgroundContext: CoroutineContext) :
+    AbstractViewModel(backgroundContext) {
     data class NewProductUiState(
         val isProductAdded: Boolean = false,
         val product: Product? = null,

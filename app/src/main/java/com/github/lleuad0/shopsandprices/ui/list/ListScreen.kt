@@ -35,6 +35,7 @@ fun ListScreen(
 ) {
     val context = LocalContext.current
     val state = viewModel.stateFlow.collectAsState()
+    val abstractState = viewModel.abstractStateFlow.collectAsState()
     val scope = rememberCoroutineScope()
     val items = state.value.products.collectAsLazyPagingItems()
 
@@ -70,6 +71,13 @@ fun ListScreen(
                     Modifier.align(Alignment.Center)
                 )
             }
+        }
+    }
+
+    LaunchedEffect(abstractState.value.throwable) {
+        abstractState.value.throwable?.let {
+            // TODO: show an error
+            scope.launch { viewModel.onErrorThrown() }
         }
     }
     LaunchedEffect(state.value.isProductDeleted) {

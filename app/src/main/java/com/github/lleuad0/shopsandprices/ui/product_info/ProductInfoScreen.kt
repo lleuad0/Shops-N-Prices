@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -17,6 +18,7 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.github.lleuad0.shopsandprices.Destination
 import com.github.lleuad0.shopsandprices.R
+import kotlinx.coroutines.launch
 
 object ProductInfoDestination : Destination {
     override val route = "product_info"
@@ -31,6 +33,8 @@ object ProductInfoDestination : Destination {
 @Composable
 fun ProductInfoScreen(viewModel: ProductInfoViewModel, productId: Long, toEdit: (Long) -> Unit) {
     val state = viewModel.stateFlow.collectAsState()
+    val abstractState = viewModel.abstractStateFlow.collectAsState()
+    val scope = rememberCoroutineScope()
 
     Scaffold(floatingActionButton = {
         ExtendedFloatingActionButton(onClick = { toEdit(productId) }) {
@@ -59,6 +63,13 @@ fun ProductInfoScreen(viewModel: ProductInfoViewModel, productId: Long, toEdit: 
         }
     }
 
+
+    LaunchedEffect(abstractState.value.throwable) {
+        abstractState.value.throwable?.let {
+            // TODO: show an error
+            scope.launch { viewModel.onErrorThrown() }
+        }
+    }
     LaunchedEffect(productId) {
         with(viewModel) {
             getProduct(productId)

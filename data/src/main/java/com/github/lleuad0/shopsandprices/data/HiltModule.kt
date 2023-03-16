@@ -12,7 +12,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
+import kotlin.coroutines.CoroutineContext
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -22,6 +24,9 @@ abstract class HiltModule {
     abstract fun bindsLocalRepository(localRepositoryImpl: LocalRepositoryImpl): LocalRepository
 
     companion object {
+        @Provides
+        @Singleton
+        fun providesBackgroundContext(): CoroutineContext = Dispatchers.Default
 
         @Provides
         @Singleton

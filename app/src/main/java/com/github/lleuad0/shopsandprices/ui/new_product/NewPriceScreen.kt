@@ -24,7 +24,9 @@ fun NewPriceScreen(
     navigateNext: () -> Unit,
 ) {
     val parentState = parentViewModel.stateFlow.collectAsState()
+    val abstractParentState = parentViewModel.abstractStateFlow.collectAsState()
     val state = viewModel.stateFlow.collectAsState()
+    val abstractState = viewModel.abstractStateFlow.collectAsState()
     val scope = rememberCoroutineScope()
     var price by remember { mutableStateOf("") }
 
@@ -55,6 +57,19 @@ fun NewPriceScreen(
                     Text(text = stringResource(id = R.string.save_button))
                 }
             }
+        }
+    }
+
+    LaunchedEffect(abstractState.value.throwable) {
+        abstractState.value.throwable?.let {
+            // TODO: show an error
+            scope.launch { viewModel.onErrorThrown() }
+        }
+    }
+    LaunchedEffect(abstractParentState.value.throwable) {
+        abstractParentState.value.throwable?.let {
+            // TODO: show an error
+            scope.launch { parentViewModel.onErrorThrown() }
         }
     }
     LaunchedEffect(state.value.isPriceAdded) {
