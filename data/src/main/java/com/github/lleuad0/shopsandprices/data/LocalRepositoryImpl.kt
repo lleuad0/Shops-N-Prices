@@ -27,15 +27,15 @@ class LocalRepositoryImpl @Inject constructor(
     }
 
     override suspend fun addProduct(product: Product): Product {
-        return productDao.getProductById(productDao.insertProduct(product.toDb())).toUi()
+        return productDao.getProductById(productDao.insertProduct(product.toDb()))!!.toUi()
     }
 
     override suspend fun updateProduct(product: Product) {
         return productDao.updateProduct(product.toDb())
     }
 
-    override suspend fun getProductById(productId: Long): Product {
-        return productDao.getProductById(productId).toUi()
+    override suspend fun getProductById(productId: Long): Product? {
+        return productDao.getProductById(productId)?.toUi()
     }
 
     override suspend fun removeProduct(product: Product) {

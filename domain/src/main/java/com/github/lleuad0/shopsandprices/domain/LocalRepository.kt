@@ -10,7 +10,7 @@ interface LocalRepository {
     suspend fun getAllProducts(): Flow<PagingData<Product>>
     suspend fun addProduct(product: Product): Product
     suspend fun updateProduct(product: Product)
-    suspend fun getProductById(productId: Long): Product
+    suspend fun getProductById(productId: Long): Product?
     suspend fun removeProduct(product: Product)
 
     suspend fun getAllShops(): Flow<PagingData<Shop>>

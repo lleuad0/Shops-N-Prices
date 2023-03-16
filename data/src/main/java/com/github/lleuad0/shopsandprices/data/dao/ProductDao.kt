@@ -13,7 +13,7 @@ interface ProductDao {
     fun updateProduct(productDb: ProductDb)
 
     @Query("SELECT * from products WHERE product_id = :productId LIMIT 1")
-    fun getProductById(productId: Long): ProductDb
+    fun getProductById(productId: Long): ProductDb?
 
     @Delete
     fun deleteProduct(productDb: ProductDb)
